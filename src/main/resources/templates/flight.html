@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Flights</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/flight.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}">
+</head>
+<body>
+
+<form class="date-bar" th:action="@{/search}" method="get" id="dateNavForm">
+    <button type="button" class="btn" id="prevDay">◀ Previous Day</button>
+    <button type="button" class="btn" id="nextDay">Next Day ▶</button>
+
+    <div class="filters">
+        <input type="hidden" name="passengerNum" th:value="${searchINFO.passengerNum}">
+        <input type="hidden" name="origin" th:value="${searchINFO.origin}">
+        <input type="hidden" name="destination" th:value="${searchINFO.destination}">
+        <input type="hidden" name="seatClass" th:value="${searchINFO.seatClass}">
+        <input type="date" name="departureDate" id="departureDate"
+               th:value="${#temporals.format(searchINFO.departureDate, 'yyyy-MM-dd')}" />
+        <button class="btn" type="submit">Jump To Date</button>
+
+        <script>
+            const departureInput = document.getElementById('departureDate');
+            if(!departureInput.value)
+            {
+                const today = new Date().toISOString().split('T')[0];
+                departureInput.value = today;
+            }
+
+            function changeDate(days)
+            {
+                const dateInput = document.getElementById('departureDate');
+                let currentDate = new Date(dateInput.value);
+                currentDate.setDate(currentDate.getDate() + days);
+                dateInput.value = currentDate.toISOString().split('T')[0];
+                document.querySelector("form").submit;
+            }
+
+            document.getElementById('prevDay').addEventListener('click', function()
+            {
+                changeDate(-1);
+            });
+
+            document.getElementById('nextDay').addEventListener('click', function()
+            {
+                changeDate(1);
+            });
+        </script>
+    </div>
+</form>
+
+<form class="container" th:action="@{/passengerInfo}" method="get">
+    <input type="hidden" name="passengerNum" th:value="${searchINFO.passengerNum}">
+    <input type="hidden" name="seatClass" th:value="${searchINFO.seatClass}">
+    <input type="hidden" name="priceByClass" th:value="${priceByClass}">
+    <div class="tickets">
+        <p th:if="${#lists.isEmpty(flight)}">No flight founded for this date!</p>
+
+        <div class="ticket" th:each="f : ${flight}">
+            <input type="hidden" name="flightNumber" th:value="${f.flightId}">
+
+            <aside class="ticket-side">
+
+                <h5 class="flight-class" th:text="${searchINFO.seatClass}"></h5>
+
+                <span th:text="${priceByClass} + '$'"></span>
+
+                <P>Empty Seats:
+                    <span th:text="${numberOfSeat[f.flightId]}" th:classappend="${numberOfSeat[f.flightId] < 7} ? 'low-seat' : ''"></span>
+                </P>
+
+                <div class="airline">
+                    <div>
+                        <div class="label">Airline</div>
+                        <div class="value" th:text="${f.airlineId?.name}">Airline</div>
+                    </div>
+                </div>
+
+                <div class="airline-logo">
+                    <img
+                            th:if="${f.airlineId.logoUrl!=null}"
+                            th:src="@{${f.airlineId?.logoUrl}}"
+                    />
+                </div>
+
+                <button class="buy-btn" th:disabled="${numberOfSeat[f.flightId] == 0}">Buy Ticket</button>
+
+            </aside>
+
+            <section class="ticket-body">
+                <div class="field">
+                    <div class="label">FROM</div>
+                    <div class="value" th:text="${f.originAirportId?.name+ ' — ' + f.originAirportId?.city}">IKA — Tehran</div>
+                </div>
+                <div class="field">
+                    <div class="label">TO</div>
+                    <div class="value" th:text="${f.destinationAirportId?.name + ' — ' + f.destinationAirportId?.city}">IST — Istanbul</div>
+                </div>
+                <div class="field">
+                    <div class="label">DATE</div>
+                    <div class="value" th:text="${#temporals.format(f.departureDate,'yyyy-MM-dd')}">2025-08-31</div>
+                </div>
+                <div class="field1">
+                    <div class="label">TAKEOFF</div>
+                    <div class="value" th:text="${#temporals.format(f.takeoffTime,'HH:mm')}"></div>
+                </div>
+                <p><i class="fa-solid fa-plane"></i>---------------------------</p>
+                <div class="field">
+                    <div class="label">LAND</div>
+                    <div class="value" th:text="${#temporals.format(f.landingTime,'HH:mm')}"></div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="divider"></div>
+
+            </section>
+        </div>
+    </div>
+</form>
+
+<script>
+    const dateInput = document.getElementById('dateInput');
+    const dateDisplay = document.getElementById('dateDisplay');
+    const form = document.getElementById('dateNavForm');
+    function shiftDate(days) {
+      const d = new Date(dateInput.value || dateDisplay.textContent);
+      d.setDate(d.getDate() + days);
+      const iso = d.toISOString().slice(0, 10);
+      dateInput.value = iso;
+      dateDisplay.textContent = iso;
+      form.submit();
+    }
+    document.getElementById('prevDay').addEventListener('click', () => shiftDate(-1));
+    document.getElementById('nextDay').addEventListener('click', () => shiftDate(1));
+</script>
+
+<script>
+    function openDetails()
+    {
+        document.getElementById("detailsModal").style.display = "block";
+    }
+    function closeDetails()
+    {
+        document.getElementById("detailsModal").style.display = "none";
+    }
+    window.onclick = function(event)
+    {
+        const modal = document.getElementById("detailsModal");
+        if (event.target === modal)
+        {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>

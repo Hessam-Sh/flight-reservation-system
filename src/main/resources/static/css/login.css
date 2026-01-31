@@ -1,0 +1,95 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-image: url('../assets/login.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: 'Vazir', sans-serif;
+}
+
+
+*{
+    box-sizing:border-box
+}
+
+.background
+ {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.airplane
+{
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    width: 150px;
+    animation: fly 10s linear infinite;
+}
+
+@keyframes fly
+{
+    0% { left: -200px; top: 20%; }
+    100% { left: 100%; top: 5%; }
+}
+
+/* کانتینر اصلی فرم */
+.sign-up-container {
+  background:url("/assets/login.png");
+  background-size:100%;
+  background-position:center center;
+  background-repeat:no-repeat;
+  height:100%;
+  width:100%;
+  display:flex;
+  justify-content:flex-start;
+  align-items:flex-end
+}
+
+/* باکس فرم */
+.sign-up-content {
+  background-color: rgba(0, 0, 0, 0.5); /* نیمه‌شفاف برای خوانایی روی تصویر */
+  padding: 50px;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+  width: 400px;
+  color: white;
+  margin:40px;
+}
+
+/* فیلدهای ورودی */
+.input input{
+  width: 100%;
+  padding: 14px;
+  margin: 15px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  background-color: #0b1f3a;
+}
+label{
+text-align:left
+}
+
+
+/* دکمه ثبت */
+button {
+    background: #1e3a5f;
+     color: #000c4c;
+     border: none;
+     padding: 10px;
+     margin: 5px auto 0 auto;
+     cursor: pointer;
+     width:50%;
+     border-radius:10px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0097a7;
+}

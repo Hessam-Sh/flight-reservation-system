@@ -1,0 +1,173 @@
+body {
+    margin: 0;
+    font-family: 'Vazir', sans-serif;
+    background-color: #0b1f3a;
+    color: white;
+    background: url('/assets/background.jpg') no-repeat center center fixed;
+        background-size: cover;
+
+   display:flex;
+   justify-content:flex-start;
+   align-items:center;
+   overflow:hidden !important;
+   align-content:center
+}
+
+.background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.airplane {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    width: 150px;
+    animation: fly 10s linear infinite;
+}
+
+@keyframes fly {
+    0% { left: -200px; top: 20%; }
+    100% { left: 100%; top: 5%; }
+}
+
+.booking-container {
+    max-width: 500px;
+    margin:100px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 40px;
+    border-radius: 10px;
+    margin-right: 300px;
+}
+
+.tabs button {
+    background: #1e3a5f;
+    color: #000c4c;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.tabs .active {
+    background: #ffffff;
+    color: #000c4c;
+}
+
+form input, form select, form button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px 0 10px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color:#0b1f3a;
+    color:white;
+    text-align:left
+}
+
+.date{
+    width:100%;
+
+}
+
+form button {
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+
+    text-align:center;
+}
+
+.ai-assistant {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+   position:absolute;
+   left:20px;
+   bottom:50px;
+   margin-left: 200px;
+   margin-top: -300px;
+    margin-button: 100px;
+}
+
+.auth-buttons
+{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.btn
+{
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3 ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.login-btn
+{
+    background-color: #1a2a6c;
+    color: white;
+}
+
+.signup-btn
+{
+    background-color: #1a2a6c;
+    color: white;
+}
+
+.logout-btn
+{
+    background-color: #1a2a6c;
+    color: white;
+}
+
+.btn:hover
+{
+    background-color: #16235a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.message-container
+{
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    top: -250px;
+    padding: 0;
+}
+
+.alert.login
+{
+    color: #2192ff;
+    border-radius: 8px;
+    font-weight: bold;
+    margin: 20px auto;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.alert.logout
+{
+    color: red;
+    border-radius: 8px;
+    font-weight: bold;
+    margin: 20px auto;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.Login a{
+    text-decoration:none
+}

@@ -1,0 +1,132 @@
+/* رنگ‌ها */
+:root {
+  --navy: #001f3f;      /* سورمه‌ای تیره */
+  --teal-dark: #004c4c; /* آبی نفتی */
+  --light: #f4f4f4;
+}
+
+body {
+  background-image: url('../assets/passenger-page.png');
+  font-family: "Tahoma", sans-serif;
+  background-color: var(--navy);
+  color: var(--light);
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  backdrop-filter: blur(6px);
+  background: rgb(12 12 80 / 26%);
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #4664cb;
+}
+
+.passenger-card {
+  background: rgb(42 86 173 / 20%);
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+
+.passenger-card h3 {
+  margin-top: 0;
+  color: #4664cb;
+}
+
+.error{
+  color: red;
+  font-weight: bold;
+  margin-top: 4px;
+  font-size: 0.9rem;
+}
+
+.checkbox-container{
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #7d8696;
+}
+
+.checkbox-container
+input[type="checkbox"]{
+  accent-color: #1a73e8;
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.date-input {
+  background: radial-gradient(#0e0f54, #24528dbf);
+  background-color: var(--teal-dark);
+  color: #616161;
+  border: 2px solid var(--accent);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-family: "Tahoma", sans-serif;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+/* وقتی موس روش میره */
+.date-input:hover {
+  background-color: #006666;
+  border-color: #33ffff;
+}
+
+/* وقتی انتخاب میشه */
+.date-input:focus {
+  box-shadow: 0 0 8px var(--accent);
+  border-color: #33ffff;
+}
+
+/* تغییر رنگ آیکون تقویم (برای مرورگرهای مدرن) */
+.date-input::-webkit-calendar-picker-indicator {
+  filter: invert(1) sepia(1) saturate(5) hue-rotate(160deg);
+  cursor: pointer;
+}
+
+
+input[type="text"] {
+  background: radial-gradient(#0e0f54, #24528dbf);
+  width: 100%;
+  padding: 8px;
+  margin: 6px 0;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+input[type="text"]:focus {
+  outline: 2px solid #00cccc;
+}
+
+.submit-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: #4664cb;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #123075;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #370c75eb;
+}

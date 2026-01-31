@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Buy Ticket</title>
+    <link th:href="@{/css/passenger-page.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <h2>Passenger Information</h2>
+
+    <form th:action="@{/setPassengerInfo}" th:object="${passengerForm}" method="post">
+        <input type="hidden" name="flightNumber" th:value="${flightNumber}">
+        <input type="hidden" name="priceByClass" th:value="${priceByClass}">
+        <th:block th:each="seat : ${reservedSeats}">
+            <input type="hidden" name="reservedSeats" th:value="${seat}">
+        </th:block>
+        <input type="hidden" name="reservedSeats" th:value="${reservedSeats}">
+
+        <input type="hidden" name="seatClass" th:value="${seatClass}">
+
+        <div th:each="p, iterStat : *{passengers}">
+
+            <div class="passenger-card">
+                <h3>Passenger [[${iterStat.count}]]</h3>
+                <input type="text" name="firstName" th:field="*{passengers[__${iterStat.index}__].firstName}" placeholder="First Name" required>
+                <div th:errors="*{passengers[__${iterStat.index}__].firstName}" class="error"></div>
+                <input type="text" name="lastName" th:field="*{passengers[__${iterStat.index}__].lastName}" placeholder="Last Name" required>
+                <div th:errors="*{passengers[__${iterStat.index}__].lastName}" class="error"></div>
+                <input type="text" name="nationalCode" th:field="*{passengers[__${iterStat.index}__].nationalCode}" placeholder="National Code" required>
+                <div th:errors="*{passengers[__${iterStat.index}__].nationalCode}" class="error"></div>
+                <input class="date-input" type="date" th:field="*{passengers[__${iterStat.index}__].bornDate}" name="bornDate" id="bornDate" placeholder="Born Date" required>
+                <div th:errors="*{passengers[__${iterStat.index}__].bornDate}" class="error"></div>
+                <input type="text" name="phoneNumber" th:field="*{passengers[__${iterStat.index}__].phoneNumber}" placeholder="Phone Number" required>
+                <div th:errors="*{passengers[__${iterStat.index}__].phoneNumber}" class="error"></div>
+            </div>
+
+        </div>
+
+        <div class="checkbox-container">
+            <input type="checkbox" id="confirmCheck" required>
+            <label for="confirmCheck">I agree to the terms and conditions of the reservation</label>
+        </div>
+
+        <button type="submit" class="submit-btn">Reserve</button>
+    </form>
+</div>
+
+<script>
+    const today = new Date().toISOString().split('T')[0];
+    document.querySelectorAll(".date-input").forEach(input => {
+        input.value = today;
+    });
+</script>
+
+</body>
+</html>

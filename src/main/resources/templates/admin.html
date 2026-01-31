@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Log in</title>
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+
+<div class="sign-up-container">
+
+  <form th:action="@{/admin/saveTicket}" th:object="${formData}" method="post" enctype="multipart/form-data" class="sign-up-content">
+
+      <h2>New Ticket</h2>
+
+      <label>
+         Origin:
+         <div class="input">
+             <input placeholder="Origin" name="origin" th:field="*{flight.origin}" required/>
+         </div>
+     </label>
+
+      <label>
+          Destination:
+          <div class="input">
+              <input placeholder="Destination" name="destination" th:field="*{flight.destination}" required/>
+          </div>
+      </label>
+
+      <label>
+          Departure Date:
+          <div class="input">
+              <input type="date" placeholder="Departure Date" name="departureDate" th:field="*{flight.departureDate}" required/>
+          </div>
+      </label>
+
+      <label>
+          Takeoff Time:
+          <div class="input">
+              <input type="time" placeholder="Takeoff Time" name="takeoffTime" th:field="*{flight.takeoffTime}"/>
+          </div>
+      </label>
+
+      <label>
+          Landing Time:
+          <div class="input">
+              <input type="time" placeholder="Landing Time" name="landingTime" th:field="*{flight.landingTime}"/>
+          </div>
+      </label>
+
+      <label>
+          Capacity:
+          <div class="input">
+              <input type="number" placeholder="Capacity" name="capacity" th:field="*{flight.capacity}" required/>
+          </div>
+      </label>
+
+      <label>
+          Origin Airport Name:
+          <div class="input">
+              <input placeholder="Origin Airport Name" name="originAirportName" th:field="*{originAirport.name}" required/>
+          </div>
+      </label>
+
+      <label>
+          Origin City:
+          <div class="input">
+              <input placeholder="Origin City" name="originCity" th:field="*{originAirport.city}" required/>
+          </div>
+      </label>
+
+      <label>
+          Origin Country:
+          <div class="input">
+              <input placeholder="Origin Country" name="originCountry" th:field="*{originAirport.country}" required/>
+          </div>
+      </label>
+
+      <label>
+          Destination Airport Name:
+          <div class="input">
+              <input placeholder="Destination Airport Name" name="destinationAirportName" th:field="*{destinationAirport.name}" required/>
+          </div>
+      </label>
+
+      <label>
+          Destination City:
+          <div class="input">
+              <input placeholder="Destination City" name="destinationCity" th:field="*{destinationAirport.city}" required/>
+          </div>
+      </label>
+
+      <label>
+          Destination Country:
+          <div class="input">
+              <input placeholder="Destination Country" name="destinationCountry" th:field="*{destinationAirport.country}" required/>
+          </div>
+      </label>
+
+      <label>
+          Airline Name:
+          <div class="input">
+              <input placeholder="Airline Name" name="airlineName" th:field="*{airline.name}" required/>
+          </div>
+      </label>
+
+      <label>
+          Plane:
+          <div class="input">
+              <input placeholder="Plane" name="plane" th:field="*{airline.planeType}" required/>
+          </div>
+      </label>
+
+      <label>
+          <div class="input" >
+              <input type="file" name="logo" accept="image/png, image/jpeg, image/jpg" />
+              <input type="text" name="logoUrl" th:field="*{airline.logoUrl}" hidden />
+          </div>
+      </label>
+
+
+
+          <div class="btn" style="display:flex;justify-content:center">
+              <button type="submit">Save</button>
+          </div>
+
+      <div >
+          <a th:href="@{/}" style="margin-right:20px">Home</a>
+      </div>
+
+  </form>
+
+</div>
+
+
+</body>
+</html>

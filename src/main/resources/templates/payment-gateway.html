@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Gateway</title>
+    <link rel="stylesheet" th:href="@{/css/payment-gateway.css}">
+</head>
+<body>
+
+<div class="payment-container">
+    <h1 class="title">BUY TICKET</h1>
+    <form th:action="@{/confirmTicket}" method="post" class="payment-form" autocomplete="off">
+
+        <th:block th:each="seat : ${reservedSeats}">
+            <input type="hidden" name="reservedSeats" th:value="${seat}">
+        </th:block>
+
+        <input type="hidden" name="priceByClass" th:value="${priceByClass}">
+
+        <input type="hidden" name="seatClass" th:value="${seatClass}">
+
+        <label>Card Number</label>
+        <input type="text" name="cardNO" id="cardNO" maxlength="19" pattern="\d{4} \d{4} \d{4} \d{4}" placeholder="**** **** **** ****" autocomplete="off" inputmode="numeric" required>
+
+        <label>CVV2</label>
+        <input type="number" id="cvv2" name="cvv2" maxlength="4" pattern="\d{3,4}" placeholder="CVV2" inputmode="numeric" min="100" max="9999" required>
+        <span id="cvvError" style="color:red; display:none;">CVV2 must be 3 or 4 digits</span>
+
+        <label>Expiry Date</label>
+        <input type="month" name="expiry" placeholder="MM/YY" required>
+
+        <label>Password</label>
+        <input type="text" id="pass" name="pass" placeholder="password" inputmode="numeric" autocomplete="new-password" required>
+        <small id="passError" style="color: red; display: none;">Only numbers are allowed and at least 6 digits!</small>
+
+        <label>Price</label>
+        <input type="text" id="price" name="price" th:value="${priceByClass} + '$'" readonly>
+
+        <div class="buttons">
+            <button type="submit" class="confirm-btn">Confirm</button>
+            <button type="button" class="cancel-btn" onclick="cancelPayment()">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function cancelPayment() {
+        alert("Your payment was canceled. Best of luck next time!");
+        window.location.href = "/cancelTicket";
+    }
+</script>
+
+<script>
+    document.getElementById('cardNO').addEventListener('input', function (e)
+    {
+        let value = e.target.value.replace(/\D/g, '');
+        value = value.slice(0, 16);
+        let formated = value.match(/.{1,4}/g)?.join(' ') || '';
+        e.target.value = formated;
+    });
+</script>
+
+<script>
+    const cvvInput = document.getElementById('cvv2');
+  const errorSpan = document.getElementById('cvvError');
+
+  cvvInput.addEventListener('input', function () {
+    const value = cvvInput.value.replace(/\D/g, '');
+    cvvInput.value = value.slice(0, 4);
+    if (value.length > 4) {
+      errorSpan.style.display = 'inline';
+    } else {
+      errorSpan.style.display = 'none';
+    }
+  });
+</script>
+
+<script>
+    const pass = document.getElementById('pass');
+    const error = document.getElementById('passError');
+
+    pass.addEventListener('input', () => {
+        const value = pass.value;
+
+        if (/^\d{6,}$/.test(value)) {
+            error.style.display = 'none';
+            pass.setCustomValidity('');
+        }
+        else
+        {
+            error.style.display = 'inline';
+            pass.setCustomValidity('Only numbers are allowed and at least 6 digits!');
+        }
+    });
+
+    function validateForm()
+    {
+        if (!pass.checkValidity())
+        {
+            pass.reportValidity();
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Tickets</title>
+    <link rel="stylesheet" th:href="@{/css/confirmedTicket.css}">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}">
+</head>
+<body>
+
+<div class="index-container">
+    <a class="home-btn" th:href="@{/}">Home</a>
+    <a class="pdf-btn" th:href="@{/download-ticket-pdf}">PDF</a>
+</div>
+
+<div class="tickets-container" th:each="t, iterStat : ${latestTickets}">
+    <div class="ticket-card">
+        <h2>Flight Ticket</h2>
+        <div class="ticket-info">
+            <div class="route">
+                <div class="from">
+                    <p th:text="'Take-off: ' + ${t.flightId?.takeoffTime}"></p>
+                    <span th:text="${t.flightId?.originAirportId?.name}"></span>
+                </div>
+                <div class="arrow"><span ><i class="fa-solid fa-plane"></i></span></div>
+                <div>
+                    <p th:text="'Landing: ' + ${t.flightId?.landingTime}"></p>
+                    <span class="to" th:text="${t.flightId?.destinationAirportId?.name}"></span>
+                </div>
+            </div>
+            <div class="details">
+                <p>First Name: <strong th:text="${t.passengerId?.firstName}"></strong></p>
+                <p>Last Name: <strong th:text="${t.passengerId?.lastName}"></strong></p>
+                <p>Airline: <strong th:text="${t.flightId?.airlineId?.name}"></strong> </p>
+                <p>Flight Date: <strong th:text="${t.flightId?.departureDate}"></strong></p>
+                <p>Seat Number: <strong th:text="${t.seatNumber}"></strong></p>
+                <div class="qrcode"
+                     th:data-value="${latestBookings[iterStat.index].bookingCode}"
+                     th:data-firstName="${t.passengerId.firstName}"
+                     th:data-lastName="${t.passengerId.lastName}"
+                     th:data-airline="${t.flightId.airlineId.name}"
+                     th:data-departureDate="${t.flightId.departureDate}"
+                     th:data-takeoffTime="${t.flightId.takeoffTime}"
+                     th:data-landingTime="${t.flightId.landingTime}"
+                     th:data-originAirport="${t.flightId.originAirportId.name}"
+                     th:data-destinationAirport="${t.flightId.destinationAirportId.name}"
+                     th:data-seatNumber="${t.seatNumber}">
+                </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+   document.querySelectorAll('.qrcode').forEach(function(el) {
+     var value = el.getAttribute("data-value");
+     var firstName = el.getAttribute("data-firstName");
+     var lastName = el.getAttribute("data-lastName");
+     var airline = el.getAttribute("data-airline");
+     var departureDate = el.getAttribute("data-departureDate");
+     var takeoffTime = el.getAttribute("data-takeoffTime");
+     var landingTime = el.getAttribute("data-landingTime");
+     var originAirport = el.getAttribute("data-originAirport");
+     var destinationAirport = el.getAttribute("data-destinationAirport");
+     var seatNumber = el.getAttribute("data-seatNumber");
+
+     var qrData = "Ticket ID: " + value +
+                  "\nFirst Name: " + firstName +
+                  "\nLast Name: " + lastName +
+                  "\nAirline: " + airline +
+                  "\nDeparture Date: " + departureDate +
+                  "\nTakeoff Time: " + takeoffTime +
+                  "\nLanding Time: " + landingTime +
+                  "\nOrigin Airport: " + originAirport +
+                  "\nDestination Airport: " + destinationAirport +
+                  "\nSeat Number: " + seatNumber;
+
+     el.innerHTML = "";
+
+     new QRCode(el, {
+       text: qrData,
+       width: 150,
+       height: 150,
+       colorDark : "#000000",
+       colorLight : "#ffffff",
+       correctLevel : QRCode.CorrectLevel.H
+     });
+   });
+ });
+    </script>
+
+</div>
+</body>
+</html>

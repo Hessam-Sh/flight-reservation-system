@@ -1,0 +1,142 @@
+body {
+  font-family: "Tahoma", sans-serif;
+  background-color: #0d1b2a; /* صورمه‌ای تیره */
+  color: #ffffff;
+  margin: 0;
+  margin-right: 250px;
+  padding: 20px;
+  text-align: left;
+  direction: rtl;
+}
+
+.home-btn
+{
+    position: fixed;
+    top: 16px;
+    right: 45px;
+    display: inline-block;
+
+    background: #1a2a6c;
+    color: #fff;
+    text-decoration: none;
+
+    padding: 10px 16px;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(26, 42, 108, 0.25);
+
+    font-weight: 600;
+    letter-space: 0.2px;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease
+}
+
+.home-btn:hover
+{
+    background: #16235a;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(26, 42, 108, 0.28);
+}
+
+.home-btn:active
+{
+    transform: translateY(0);
+    box-shadow: 0 6px 16px rgba(26, 42, 108, 0.25);
+}
+
+.pdf-btn
+{
+     position: fixed;
+     top: 90px;
+     right: 60px;
+     display: inline-block;
+
+     background: #1a2a6c;
+     color: #fff;
+     text-decoration: none;
+
+     padding: 10px 16px;
+     border-radius: 10px;
+     box-shadow: 0 6px 16px rgba(26, 42, 108, 0.25);
+
+     font-weight: 600;
+     letter-space: 0.2px;
+
+     border: 1px solid rgba(255, 255, 255, 0.25);
+
+     transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease
+}
+
+.pdf-btn:hover
+{
+    background: #16235a;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(26, 42, 108, 0.28);
+}
+
+.pdf-btn:active
+{
+    transform: translateY(0);
+    box-shadow: 0 6px 16px rgba(26, 42, 108, 0.25);
+}
+
+.tickets-container {
+  display: flex;
+  margin-bottom: 30px;
+  width: 900px;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.index-container {
+  display: flex;
+  margin-bottom: 30px;
+  width: 90px;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ticket-card {
+  background-color: #1b263b; /* کارت کمی روشن‌تر از بک‌گراند */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.ticket-card h2 {
+  margin-top: 10px;
+  font-size: 20px;
+  border-bottom: 1px solid #2277da;
+  padding-bottom: 10px;
+  color: #e0e1dd;
+  text-align: left;
+}
+
+.qrcode {
+  display: inline-block;
+  justify-content: flex-start; /* چپ‌چین کردن محتوا */
+  text-align: left;
+}
+
+.ticket-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.route {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.route .arrow {
+  color: #778da9;
+}
+
+.details p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #e0e1dd;
+}

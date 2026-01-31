@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>Booking Ticket</title>
+  <link rel="stylesheet" href="/css/index.css">
+  <script src="/js/index.js" defer></script>
+
+</head>
+<body direction="ltl">
+<div class="background">
+  <img src="/assets/airplane.png" alt="Airplane" class="airplane">
+  <div class="stars"></div>
+  <div class="clouds"></div>
+</div>
+
+<div class="booking-container">
+
+  <div class="auth-buttons" sec:authorize="!isAuthenticated()">
+    <a th:href="@{/login}" class="btn login-btn">Login</a>
+    <a th:href="@{/sign-up}" class="btn signup-btn">Sign up</a>
+  </div>
+
+  <div class="auth-buttons" sec:authorize="isAuthenticated()">
+      <form th:action="@{/logout}" method="post">
+          <button type="submit" class="btn logout-btn">Logout</button>
+      </form>
+  </div>
+
+  <h1>Flight Booking</h1>
+  <div class="tabs">
+    <label>
+    <input class="active" type="radio" name="tripType" value="oneway" checked>Round-trip
+    </label>
+    <label>
+      <input class="active" type="radio" name="tripType" value="roundtrip">One-way
+    </label>
+  </div>
+
+  <form th:action="@{/search}" method="get">
+    <input type="text" name="origin" placeholder="Origin">
+    <input type="text" name="destination" placeholder="Destination">
+    <div style="display:flex;justify-content:space-around;align-items:center;">
+
+
+      <label style="float:left ; margin:10px;text-align:left">Return Date
+        <input class="date" type="date" name="returnDate" id="returnDate">
+      </label>
+      <label style="float:left ; margin:10px ;text-align:left">Departure
+
+        <input class="date" type="date" name="departureDate" id="departureDate">
+      </label>
+
+      <script>
+        const today = new Date().toISOString().split('T')[0];
+        document.querySelectorAll("input[type=date]").forEach(input => {
+        input.value = today;
+        });
+      </script>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', () =>
+        {
+        const tripTypeRadios = document.querySelectorAll('input[name="tripType"]');
+        const departureDateField = document.getElementById('departureDate');
+        const returnDateField = document.getElementById('returnDate');
+        function toggleReturnDate()
+        {
+          const isOneWay = document.querySelector('input[name="tripType"]:checked')?.value === 'oneway';
+          returnDateField.disabled = isOneWay;
+          if (isOneWay) returnDateField.value = '';
+        }
+        tripTypeRadios.forEach(radio => radio.addEventListener('change', toggleReturnDate));
+        toggleReturnDate();
+        });
+      </script>
+    </div>
+
+    <select name="seatClass">
+      <option value="Economy">Economy</option>
+      <option value="Business">Business</option>
+      <option value="First">First Class</option>
+    </select>
+
+
+      <input type="number" name="passengerNum" placeholder="passenger" min="0">
+
+    <button type="submit">Search Flights</button>
+  </form>
+
+  <div class="ai-assistant">
+    <h3>Ask AI assistant</h3>
+    <ul>
+      <li>What's the best country to travel to?</li>
+      <li>Show me the cheapest flights!</li>
+    </ul>
+  </div>
+
+<script>
+    setTimeout(() =>{
+        const alert = document.querySelector('.alert.login');
+        if (alert) alert.style.display = 'none';
+    }, 3000);
+</script>
+
+<script>
+    setTimeout(() =>{
+        const alert = document.querySelector('.alert.logout');
+        if (alert) alert.style.display = 'none';
+    }, 3000);
+</script>
+
+</div>
+
+<div class="message-container">
+    <div th:if="${session.loginMessage}" class="alert login">
+        <p th:text="${session.loginMessage}"></p>
+    </div>
+</div>
+
+<div class="message-container">
+    <div th:if="${logoutMessage}" class="alert logout">
+        <p th:text="${logoutMessage}"></p>
+    </div>
+</div>
+
+</body>
+</html>

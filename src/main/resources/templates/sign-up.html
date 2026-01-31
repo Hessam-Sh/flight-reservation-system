@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign-up</title>
+  <link rel="stylesheet" href="/css/sign-up.css">
+</head>
+
+<body>
+
+
+<div class="sign-up-container">
+
+  <form th:action="@{/sign-up/new}" th:object="${user}" method="post" class="sign-up-content">
+
+      <h3>Sign-up</h3>
+
+      <br>
+
+      <label>
+         Email:
+         <div class="input">
+             <input placeholder="Email" name="email" th:field="*{email}" type="email" required/>
+         </div>
+
+          <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message" style="color:red"></div>
+     </label>
+      <label>
+          Password:
+          <div class="input">
+              <input min="6" placeholder="Password" name="password" th:field="*{password}" type="password" required/>
+          </div>
+
+          <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message" style="color:red"></div>
+      </label>
+
+          <div class="btn" style="display:flex;justify-content:center">
+              <button type="submit">Sign-up</button>
+          </div>
+
+  </form>
+
+</div>
+
+
+</body>
+</html>

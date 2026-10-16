@@ -76,7 +76,7 @@ Make sure you have the following installed:
 ### Clone the Repository
 
 ```bash
-git clone [https://github.com/YOUR-USERNAME/flight-reservation-system.git](https://github.com/YOUR-USERNAME/flight-reservation-system.git)
+git clone [https://github.com/Hessam-Sh/flight-reservation-system.git](https://github.com/Hessam-Sh/flight-reservation-system.git)
 cd flight-reservation-system
 ```
 
